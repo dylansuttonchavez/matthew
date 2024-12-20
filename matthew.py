@@ -5,11 +5,10 @@ import torch.nn.functional as F
 import io
 import sys
 
-# Page configuration (favicon and title)
+# Page configuration
 st.set_page_config(page_title="MATTHEW: Axiomatic AI Reasoning", page_icon="🌌")
 
-# Title and General Description of MATTHEW
-
+# Title and General Description
 st.title("**MATTHEW: Axiomatic AI with Reasoning**")
 st.markdown("""
 Welcome to the interactive presentation of **MATTHEW**, an axiomatic AI prototype
@@ -22,7 +21,6 @@ algebraic principles, linear transformations, axiomatic graphs, and multi-logic 
 """)
 
 # AAA Architecture
-
 st.header("Mathematical Foundations of the Algebraic Axiom Architecture (AAA)")
 
 st.markdown("""
@@ -78,7 +76,6 @@ z = F.relu(y)
 st.code(transform_code, language='python')
 
 # Datasets and Axioms
-
 st.header("Datasets and Axiom Collection")
 
 with st.expander("Knowledge Sources"):
@@ -167,7 +164,6 @@ generate_axiom_dataset()
     st.code(code_snippet, language='python')
 
 # Interactive Experimentation (Drug Discovery)
-
 st.header("Interactive Experimentation: New Drug for an Unknown Virus")
 
 st.markdown("""
@@ -178,7 +174,7 @@ In this experiment, we will use axioms related to an unknown virus and attempt t
 4. The result is a proposal for an innovative drug or therapy.
 """)
 
-# Create instances for interactive demo
+# Model definitions
 class AxiomEncoder(nn.Module):
     def __init__(self, input_dim, hidden_dim):
         super(AxiomEncoder, self).__init__()
@@ -187,8 +183,7 @@ class AxiomEncoder(nn.Module):
 
     def forward(self, x):
         x = F.relu(self.linear1(x))
-        x = self.linear2(x)
-        return x
+        return self.linear2(x)
 
 class ReasoningEngine(nn.Module):
     def __init__(self, hidden_dim):
@@ -197,26 +192,37 @@ class ReasoningEngine(nn.Module):
 
     def forward(self, x, noise=0.0):
         x = self.linear(x)
-        x = x + noise * torch.randn_like(x)
-        return x
+        return x + noise * torch.randn_like(x)
 
-# Cached model instances to prevent re-initializatio
+# Initialize models
+def get_models():
+    encoder = AxiomEncoder(128, 256)
+    engine = ReasoningEngine(256)
+    return encoder, engine
 
+axiom_encoder, reasoning_engine = get_models()
+
+# Text input for axioms
 axiom_text_1 = st.text_input("Axiom 1", "Virus X binds to protein receptors in host cells.")
 axiom_text_2 = st.text_input("Axiom 2", "Certain enzymatic inhibitors block viral proteases of Virus X.")
 
+# Function to simulate text to vector conversion
 def text_to_vector(text):
-    torch.manual_seed(sum([ord(c) for c in text]))
+    torch.manual_seed(sum(ord(c) for c in text))
     return torch.rand((1, 128))
 
+# Convert axioms to vectors
 ax1_vec = text_to_vector(axiom_text_1)
 ax2_vec = text_to_vector(axiom_text_2)
 
+# Encode vectors
 enc_ax1 = axiom_encoder(ax1_vec)
 enc_ax2 = axiom_encoder(ax2_vec)
 
+# Combine encoded vectors
 combined = enc_ax1 + enc_ax2
 
+# Select reasoning type
 st.markdown("**Select reasoning type:**")
 reasoning_type = st.selectbox("Reasoning Type", ["Deductive (0.0 noise)", "Inductive (0.05 noise)", "Abductive (0.1 noise)"])
 noise_map = {
@@ -226,9 +232,10 @@ noise_map = {
 }
 noise_level = noise_map[reasoning_type]
 
+# Generate drug proposal
 if st.button("Generate Drug Proposal"):
     output_vec = reasoning_engine(combined, noise=noise_level)
-    # Symbolic hypothesis
+    # Generate hypothesis based on reasoning type
     if noise_level == 0.0:
         hypothesis = "A drug based on a stable protein inhibitor that blocks receptor-viral binding."
     elif noise_level == 0.05:
@@ -238,60 +245,28 @@ if st.button("Generate Drug Proposal"):
 
     st.success(f"**Generated Drug Proposal:** {hypothesis}")
 
-# MATTHEW
-
-st.header("Validation of Theories and Future Perspectives")
-
-with st.expander("Validation"):
-    st.markdown("""
-    - **Logical Coherence:** Compare the hypothesis with the base axioms.
-    - **Originality:** Verify that the proposal is non-trivial (comparing embeddings with knowledge bases).
-    - **Applicability:** Test in biological simulations or computational models.
-    """)
-
-with st.expander("Future Impact"):
-    st.markdown("""
-    In the future, MATTHEW could:
-    - Propose new lines of scientific research.
-    """)
-
-# Dynamic Code Execution
-
+# Debugging and interactive code execution
 st.header("Dynamic Code Execution")
-
 st.markdown("""
-In this section, you can experiment with the AAA architecture by executing Python code related to project variables. For example:
-
-**Example Code:**  
-```python
-# View the combined vector output
-print("Shape of combined vector:", combined.shape)
-
-# Analyze the values of the vector
-print("Values of combined vector:", combined)
-```
-
-Enter your code below:
+Enter Python code to experiment with the combined vector or any project variable.
 """)
 
-user_code = st.text_area("Enter your Python code here:", value="""print("Shape of combined vector:", combined.shape)\nprint("Values of combined vector:", combined)""")
+user_code = st.text_area("Enter your Python code here:", value="""print('Shape of combined vector:', combined.shape)
+print('Values of combined vector:', combined)""")
 
 if st.button("Execute Code"):
-    if 'combined' not in locals():
-        st.error("The variable `combined` is not defined. Please generate the axioms before executing the code.")
-    else:
-        buffer = io.StringIO()
-        sys.stdout = buffer
-        local_vars = {"combined": combined, "torch": torch}
+    buffer = io.StringIO()
+    sys.stdout = buffer
+    local_vars = {"combined": combined, "torch": torch}
 
-        try:
-            exec(user_code, {}, local_vars)
-        except Exception as e:
-            st.error(f"Error executing code: {e}")
-        finally:
-            sys.stdout = sys.__stdout__
+    try:
+        exec(user_code, {}, local_vars)
+    except Exception as e:
+        st.error(f"Error executing code: {e}")
+    finally:
+        sys.stdout = sys.__stdout__
 
-        st.text(buffer.getvalue())
+    st.text(buffer.getvalue())
 
 st.markdown("---")
 st.markdown("""**Thank you for your attention!** If you have additional comments or need more assistance, feel free to email me at [dylan2406010@hybridge.education](mailto:dylan2406010@hybridge.education).""")
