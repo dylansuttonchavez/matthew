@@ -203,7 +203,7 @@ if st.button("Generate Drug Proposal"):
 
 # Multilayer Perceptrons
 
-st.markdown("A multilayer perceptron (MLP) is like a team of problem-solvers working together. Each "neuron" in the network receives inputs, processes them using a weighted sum, applies an activation function to introduce non-linearity (like ReLU or sigmoid), and passes the output to the next layer. The hidden layers act as feature extractors, capturing complex patterns, while the final layer combines these patterns to make predictions. Through backpropagation, the network learns by adjusting weights to minimize errors, improving its performance with each iteration!")
+st.markdown("A multilayer perceptron (MLP) is like a team of problem-solvers working together. Each neuron in the network receives inputs, processes them using a weighted sum, applies an activation function to introduce non-linearity (like ReLU or sigmoid), and passes the output to the next layer. The hidden layers act as feature extractors, capturing complex patterns, while the final layer combines these patterns to make predictions. Through backpropagation, the network learns by adjusting weights to minimize errors, improving its performance with each iteration!")
 
 # MATTHEW
 
