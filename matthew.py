@@ -200,6 +200,23 @@ if st.button("Generate Drug Proposal"):
         hypothesis = "A nanoparticle that releases specific inhibitors upon detecting viral proteases, reducing replication in the host."
 
     st.success(f"**Generated Drug Proposal:** {hypothesis}")
+
+# MATTHEW
+
+st.header("Validation of Theories and Future Perspectives")
+
+with st.expander("Validation"):
+    st.markdown("""
+    - **Logical Coherence:** Compare the hypothesis with the base axioms.
+    - **Originality:** Verify that the proposal is non-trivial (comparing embeddings with knowledge bases).
+    - **Applicability:** Test in biological simulations or computational models.
+    """)
+
+with st.expander("Future Impact"):
+    st.markdown("""
+    In the future, MATTHEW could:
+    - Propose new lines of scientific research.
+    """)
    
 st.markdown("---")
 st.markdown("""**Thank you for your attention!** If you have additional comments or need more assistance, feel free to email me at [dylan2406010@hybridge.education](mailto:dylan2406010@hybridge.education).""")
