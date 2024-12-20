@@ -46,7 +46,7 @@ st.latex(r"\mathbf{y} = W\mathbf{a} + b \quad \text{y} \quad \mathbf{z} = \sigma
 
 st.markdown("""
 3. **Razonamiento Multilógico:**
-   - Deductivo, Inductivo y Abductivo (introduciendo ruido \(\epsilon\)):
+   - Deductivo, Inductivo y Abductivo:
 """)
 st.latex(r"\mathbf{h} = \mathbf{y} + \epsilon")
 
@@ -254,9 +254,7 @@ with st.expander("Validación"):
 with st.expander("Impacto Futuro"):
     st.markdown("""
     En el futuro, MATTHEW podría:
-    - Generar tratamientos innovadores para nuevas cepas virales.
-    - Proponer líneas de investigación farmacológica.
-    - Evolucionar hacia un asistente AGI para medicina, biología y otras ciencias.
+    - Proponer líneas nuevas de investigación científica.
     """)
 
 # Ejecución Dinámica de Código
