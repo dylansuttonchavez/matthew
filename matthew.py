@@ -2,10 +2,8 @@ import streamlit as st
 import io
 import sys
 
-# Page configuration
 st.set_page_config(page_title="MATTHEW: Axiomatic AI Reasoning", page_icon="🌌")
 
-# Title and General Description
 st.title("**MATTHEW: Axiomatic AI with Reasoning**")
 st.markdown("""
 Welcome to the interactive presentation of **MATTHEW**, an axiomatic AI prototype
@@ -17,7 +15,6 @@ algebraic principles, linear transformations, axiomatic graphs, and multi-logic 
 (deductive, inductive, and abductive) to create coherent, original hypotheses with potential practical applicability.
 """)
 
-# AAA Architecture
 st.header("Mathematical Foundations of the Algebraic Axiom Architecture (AAA)")
 
 st.markdown("""
@@ -72,7 +69,6 @@ z = F.relu(y)
 """
 st.code(transform_code, language='python')
 
-# Datasets and Axioms
 st.header("Datasets and Axiom Collection")
 
 with st.expander("Knowledge Sources"):
@@ -100,28 +96,22 @@ with st.expander("Example of Curated Axioms in JSON"):
 
     st.markdown("**Snippet: Generate Dataset from Anthropic API and Web Scraping**")
     code_snippet = r"""
-import requests
-import json
-from bs4 import BeautifulSoup
+import anthropic
 import arxiv
+import json
 
 # Anthropic API Configuration
-ANTHROPIC_API_URL = "https://api.anthropic.com/v1/axioms"
 ANTHROPIC_API_KEY = "00000-00000-00000-00000-00000"
-HEADERS = {"Authorization": f"Bearer {ANTHROPIC_API_KEY}", "Content-Type": "application/json"}
 
 # Function to fetch axioms from Anthropic API
 def get_axioms_from_anthropic(prompt, max_tokens=300):
-    payload = {"prompt": prompt, "max_tokens": max_tokens}
-    response = requests.post(ANTHROPIC_API_URL, headers=HEADERS, json=payload)
-    response.raise_for_status()
-    return response.json().get("axioms", [])
-
-# Function to fetch axioms via scraping
-def get_axioms_from_web(url, css_selector):
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    return [element.get_text(strip=True) for element in soup.select(css_selector)]
+    client = anthropic.Client(ANTHROPIC_API_KEY)
+    response = client.completion(
+        prompt=prompt,
+        stop_sequences=["\n"],
+        max_tokens_to_sample=max_tokens
+    )
+    return response["completion"].split("\n")
 
 # Function to fetch axioms from arXiv
 def get_axioms_from_arxiv(query, max_results=10):
@@ -130,13 +120,14 @@ def get_axioms_from_arxiv(query, max_results=10):
 
 # Main function to generate the axiom dataset
 def generate_axiom_dataset():
-    # Fetch axioms from various sources
+    # Fetch axioms from Anthropic API
     anthropic_axioms = get_axioms_from_anthropic("List biological axioms about unknown viruses.")
-    web_axioms = get_axioms_from_web("https://www.example.com/biology/unknown-viruses", "p.axiom")
+
+    # Fetch axioms from arXiv
     arxiv_axioms = get_axioms_from_arxiv("unknown viruses biology", max_results=5)
 
     # Combine axioms
-    all_axioms = anthropic_axioms + web_axioms + arxiv_axioms
+    all_axioms = anthropic_axioms + arxiv_axioms
 
     # Create structured dataset
     dataset = [
@@ -160,7 +151,6 @@ generate_axiom_dataset()
 """
     st.code(code_snippet, language='python')
 
-# Interactive Experimentation (Drug Discovery)
 st.header("Interactive Experimentation: New Drug for an Unknown Virus")
 
 st.markdown("""
@@ -171,26 +161,20 @@ In this experiment, we will use axioms related to an unknown virus and attempt t
 4. The result is a proposal for an innovative drug or therapy.
 """)
 
-# Text input for axioms
 axiom_text_1 = st.text_input("Axiom 1", "Virus X binds to protein receptors in host cells.")
 axiom_text_2 = st.text_input("Axiom 2", "Certain enzymatic inhibitors block viral proteases of Virus X.")
 
-# Function to simulate text to vector conversion
 def text_to_vector(text):
     return sum(ord(c) for c in text)
 
-# Convert axioms to simulated values
 ax1_value = text_to_vector(axiom_text_1)
 ax2_value = text_to_vector(axiom_text_2)
 
-# Combine encoded values
 combined_value = ax1_value + ax2_value
 
-# Select reasoning type
 st.markdown("**Select reasoning type:**")
 reasoning_type = st.selectbox("Reasoning Type", ["Deductive", "Inductive", "Abductive"])
 
-# Generate drug proposal
 if st.button("Generate Drug Proposal"):
     if reasoning_type == "Deductive":
         hypothesis = "A drug based on a stable protein inhibitor that blocks receptor-viral binding."
@@ -201,7 +185,6 @@ if st.button("Generate Drug Proposal"):
 
     st.success(f"**Generated Drug Proposal:** {hypothesis}")
 
-# Multilayer Perceptron
 st.header("**Multilayer Perceptron**")
 st.markdown("""
 The multilayer perceptron (MLP) is a type of artificial neural network composed of multiple layers of 
@@ -213,8 +196,6 @@ minimizing the error between the predicted and desired outputs. Non-linear activ
 the neurons enable the MLP to model complex relationships and capture intricate patterns in data, making 
 it well-suited for tasks such as classification, regression, and pattern recognition.
 """)
-
-# MATTHEW
 
 st.header("Validation of Theories and Future Perspectives")
 
