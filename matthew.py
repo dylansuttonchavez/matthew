@@ -201,9 +201,18 @@ if st.button("Generate Drug Proposal"):
 
     st.success(f"**Generated Drug Proposal:** {hypothesis}")
 
-# Multilayer Perceptrons
-
-st.markdown("A multilayer perceptron (MLP) is like a team of problem-solvers working together. Each neuron in the network receives inputs, processes them using a weighted sum, applies an activation function to introduce non-linearity (like ReLU or sigmoid), and passes the output to the next layer. The hidden layers act as feature extractors, capturing complex patterns, while the final layer combines these patterns to make predictions. Through backpropagation, the network learns by adjusting weights to minimize errors, improving its performance with each iteration!")
+# Multilayer Perceptron
+st.title("**Multilayer Perceptron**")
+st.markdown("""
+The multilayer perceptron (MLP) is a type of artificial neural network composed of multiple layers of 
+nodes organized in a hierarchical structure. It includes an input layer, one or more hidden layers, 
+and an output layer. Each node, or neuron, in a layer is connected to nodes in the subsequent layer 
+through weights that represent the significance of each connection. During the learning process, known 
+as supervised training, the MLP employs the backpropagation algorithm to adjust these weights by 
+minimizing the error between the predicted and desired outputs. Non-linear activation functions within 
+the neurons enable the MLP to model complex relationships and capture intricate patterns in data, making 
+it well-suited for tasks such as classification, regression, and pattern recognition.
+""")
 
 # MATTHEW
 
