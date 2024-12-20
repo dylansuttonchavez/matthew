@@ -200,14 +200,7 @@ class ReasoningEngine(nn.Module):
         x = x + noise * torch.randn_like(x)
         return x
 
-# Cached model instances to prevent re-initialization
-@st.cache_resource
-def get_models():
-    encoder = AxiomEncoder(128, 256)
-    engine = ReasoningEngine(256)
-    return encoder, engine
-
-axiom_encoder, reasoning_engine = get_models()
+# Cached model instances to prevent re-initializatio
 
 axiom_text_1 = st.text_input("Axiom 1", "Virus X binds to protein receptors in host cells.")
 axiom_text_2 = st.text_input("Axiom 2", "Certain enzymatic inhibitors block viral proteases of Virus X.")
