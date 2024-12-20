@@ -39,15 +39,9 @@ The methodology demonstrates the system's ability to explore non-trivial solutio
 - **Applicability:** Test hypotheses in simulated environments or computational models.
 
 **Future Perspectives:**
-- Expand MATTHEW to propose treatments for new viral strains.
-- Generate novel pharmacological research lines.
-- Evolve into an AGI assistant applicable across multiple scientific domains.
+- Propose new lines of scientific research.
 
 ---
-
-**Contact:** [dylan2406010@hybridge.education](mailto:dylan2406010@hybridge.education)  
-**Project Repository:** [https://github.com/dylansuttonchavez/matthew](https://github.com/dylansuttonchavez/matthew)
-- Evolve into an AGI assistant applicable across multiple scientific domains.
 
 ---
 
