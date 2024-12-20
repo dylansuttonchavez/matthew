@@ -4,6 +4,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 import io
 import sys
+import os
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 # Page configuration
 st.set_page_config(page_title="MATTHEW: Axiomatic AI Reasoning", page_icon="🌌")
