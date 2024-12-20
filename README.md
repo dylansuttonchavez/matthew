@@ -4,7 +4,7 @@
 
 ## Mathematical Foundations of the Algebraic Axiom Architecture (AAA)
 
-The AAA is based on representing axioms as vectors in a space \(\mathbb{R}^n\). Linear and nonlinear transformations are applied to these representations, incorporating different forms of reasoning (deductive, inductive, abductive). These operations enable MATTHEW to generate new theories from known axioms, establishing novel connections and exploring solutions to complex problems.
+The AAA is based on representing axioms as vectors in a space $$\mathbb{R}^n$$. Linear and nonlinear transformations are applied to these representations, incorporating different forms of reasoning (deductive, inductive, abductive). These operations enable MATTHEW to generate new theories from known axioms, establishing novel connections and exploring solutions to complex problems.
 
 ### Key Principles:
 
