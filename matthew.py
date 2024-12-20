@@ -5,182 +5,180 @@ import torch.nn.functional as F
 import io
 import sys
 
-# Configuración de página (favicon y título)
-st.set_page_config(page_title="MATTHEW: IA Axiomática con Razonamiento", page_icon="🌌")
+# Page configuration (favicon and title)
+st.set_page_config(page_title="MATTHEW: Axiomatic AI Reasoning", page_icon="🌌")
 
-# Título y Descripción General de MATTHEW
+# Title and General Description of MATTHEW
 
-st.title("**MATTHEW: IA Axiomática con Razonamiento**")
+st.title("**MATTHEW: Axiomatic AI with Reasoning**")
 st.markdown("""
-Bienvenido a la presentación interactiva de **MATTHEW**, un prototipo de IA axiomática 
-diseñada para generar teorías y propuestas innovadoras a partir de axiomas multidisciplinares 
-(física, biología, matemáticas, filosofía).
+Welcome to the interactive presentation of **MATTHEW**, an axiomatic AI prototype
+designed to generate theories and innovative proposals from multidisciplinary axioms
+(physics, biology, mathematics, philosophy).
 
-La arquitectura de MATTHEW, denominada **Algebraic Axiom Architecture (AAA)**, combina 
-principios algebraicos, transformaciones lineales, grafos axiomáticos y razonamiento 
-multilógico (deductivo, inductivo y abductivo) para crear hipótesis coherentes, 
-originales y con potencial aplicabilidad práctica.
+The architecture of MATTHEW, called **Algebraic Axiom Architecture (AAA)**, combines
+algebraic principles, linear transformations, axiomatic graphs, and multi-logic reasoning
+(deductive, inductive, and abductive) to create coherent, original hypotheses with potential practical applicability.
 """)
 
-# Arquitectura AAA
+# AAA Architecture
 
-st.header("Fundamentos Matemáticos de la Algebraic Axiom Architecture (AAA)")
+st.header("Mathematical Foundations of the Algebraic Axiom Architecture (AAA)")
 
 st.markdown("""
-La AAA de MATTHEW se basa en representar axiomas como vectores en un espacio:
+The AAA of MATTHEW is based on representing axioms as vectors in a space:
 """)
 st.latex(r"\mathbb{R}^n")
 st.markdown("""
-y luego aplicar transformaciones lineales, no lineales y operaciones que incorporan distintos tipos de razonamiento.
+and then applying linear and nonlinear transformations as well as operations incorporating different types of reasoning.
 """)
 
 st.markdown("""
-1. **Representación Vectorial de Axiomas:**
+1. **Vector Representation of Axioms:**
 """)
 st.latex(r"\mathbf{a} \in \mathbb{R}^n")
 
 st.markdown("""
-2. **Transformaciones Lineales y No Lineales:**
+2. **Linear and Nonlinear Transformations:**
 """)
-st.latex(r"\mathbf{y} = W\mathbf{a} + b \quad \text{y} \quad \mathbf{z} = \sigma(W\mathbf{a} + b)")
+st.latex(r"\mathbf{y} = W\mathbf{a} + b \quad \text{and} \quad \mathbf{z} = \sigma(W\mathbf{a} + b)")
 
 st.markdown("""
-3. **Razonamiento Multilógico:**
-   - Deductivo, Inductivo y Abductivo:
+3. **Multi-logic Reasoning:**
+   - Deductive, Inductive, and Abductive:
 """)
 st.latex(r"\mathbf{h} = \mathbf{y} + \epsilon")
 
 st.markdown("""
-Estas operaciones combinadas permiten a MATTHEW ir más allá de la información dada, generando nuevas teorías.
+These combined operations enable MATTHEW to go beyond given information, generating new theories.
 """)
 
-st.subheader("Snippet de Código: Transformación Lineal y No Lineal")
+st.subheader("Snippet: Linear and Nonlinear Transformation")
 transform_code = r"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-# Dimensiones
-n = 128  # dimensión del axioma (input)
-m = 256  # dimensión del espacio transformado (hidden)
+# Dimensions
+n = 128  # dimension of the axiom (input)
+m = 256  # dimension of the transformed space (hidden)
 
 W = torch.randn(m, n)
 b = torch.randn(m, 1)
 
-# Ejemplo: vector de axioma
+# Example: axiom vector
 a = torch.randn(n, 1)
 
-# Transformación lineal
+# Linear transformation
 y = W @ a + b  # shape: (m, 1)
 
-# Aplicar no linealidad (ReLU)
+# Apply nonlinearity (ReLU)
 z = F.relu(y)
 """
 st.code(transform_code, language='python')
 
-# Datasets y Axiomas
+# Datasets and Axioms
 
-st.header("Datasets y Conjunto de Axiomas")
+st.header("Datasets and Axiom Collection")
 
-with st.expander("Fuentes de Conocimiento"):
-    st.write("**Preentrenamiento General:**")
+with st.expander("Knowledge Sources"):
+    st.write("**General Pretraining:**")
     st.markdown("- [Wikipedia Summary Dataset](https://github.com/tscheepers/Wikipedia-Summary-Dataset)")
     st.markdown("- Reddit Conversations Dataset")
 
-    st.write("**Razonamiento y Matemáticas:**")
+    st.write("**Reasoning and Mathematics:**")
     st.markdown("- [GSM8K](https://github.com/openai/grade-school-math)")
-    st.markdown("- [RuleTaker](https://allenai.org/data/rule-reasoning-dataset)")
+    st.markdown("- [RuleTaker](https://rule-reasoning.apps.allenai.org/about)")
     st.markdown("- [CLUTRR](https://github.com/facebookresearch/CLUTRR)")
 
-with st.expander("Ejemplo de Axiomas Curados en JSON"):
+with st.expander("Example of Curated Axioms in JSON"):
     sample_axiom = [
        {
          "axiom_id": "phy_001",
-         "axiom_text": "La energía no se crea ni se destruye, solo se transforma.",
-         "domain": "física",
-         "tags": ["conservación", "termodinámica"],
+         "axiom_text": "Energy is neither created nor destroyed, only transformed.",
+         "domain": "physics",
+         "tags": ["conservation", "thermodynamics"],
          "compatibilities": ["phy_002", "che_003"],
          "incompatibilities": ["phi_007"]
        }
     ]
     st.json(sample_axiom)
 
-    st.markdown("**Snippet de Código: Generar Dataset desde la API de Anthropic y Web Scraping**")
+    st.markdown("**Snippet: Generate Dataset from Anthropic API and Web Scraping**")
     code_snippet = r"""
 import requests
 import json
 from bs4 import BeautifulSoup
 import arxiv
 
-# Configuración de la API de Anthropic
+# Anthropic API Configuration
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/axioms"
 ANTHROPIC_API_KEY = "00000-00000-00000-00000-00000"
 HEADERS = {"Authorization": f"Bearer {ANTHROPIC_API_KEY}", "Content-Type": "application/json"}
 
-# Función para obtener axiomas de la API de Anthropic
+# Function to fetch axioms from Anthropic API
 def get_axioms_from_anthropic(prompt, max_tokens=300):
     payload = {"prompt": prompt, "max_tokens": max_tokens}
     response = requests.post(ANTHROPIC_API_URL, headers=HEADERS, json=payload)
     response.raise_for_status()
     return response.json().get("axioms", [])
 
-# Función para obtener axiomas de scraping
+# Function to fetch axioms via scraping
 def get_axioms_from_web(url, css_selector):
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     return [element.get_text(strip=True) for element in soup.select(css_selector)]
 
-# Función para obtener axiomas de arXiv
+# Function to fetch axioms from arXiv
 def get_axioms_from_arxiv(query, max_results=10):
     search = arxiv.Search(query=query, max_results=max_results)
     return [f"Axiom derived from: {result.title}" for result in search.results()]
 
-# Función principal para generar el dataset de axiomas
+# Main function to generate the axiom dataset
 def generate_axiom_dataset():
-    # Obtener axiomas de diferentes fuentes
-    anthropic_axioms = get_axioms_from_anthropic("Lista axiomas biológicos sobre virus desconocidos.")
-    web_axioms = get_axioms_from_web("https://www.example.com/biologia/virus-desconocidos", "p.axioma")
+    # Fetch axioms from various sources
+    anthropic_axioms = get_axioms_from_anthropic("List biological axioms about unknown viruses.")
+    web_axioms = get_axioms_from_web("https://www.example.com/biology/unknown-viruses", "p.axiom")
     arxiv_axioms = get_axioms_from_arxiv("unknown viruses biology", max_results=5)
 
-    # Combinar axiomas
+    # Combine axioms
     all_axioms = anthropic_axioms + web_axioms + arxiv_axioms
 
-    # Crear dataset estructurado
+    # Create structured dataset
     dataset = [
         {
             "axiom_id": f"bio_generated_{i}",
             "axiom_text": axiom,
-            "domain": "biología",
-            "tags": ["desconocido", "virus"],
+            "domain": "biology",
+            "tags": ["unknown", "virus"],
             "compatibilities": [],
             "incompatibilities": []
         }
         for i, axiom in enumerate(all_axioms)
     ]
 
-    # Guardar en un archivo JSON
+    # Save to a JSON file
     with open("generated_axioms.json", "w", encoding="utf-8") as f:
         json.dump(dataset, f, ensure_ascii=False, indent=2)
 
-# Ejecutar la función principal
+# Execute the main function
 generate_axiom_dataset()
 """
     st.code(code_snippet, language='python')
 
-# Experimentación Interactiva (Medicamento)
+# Interactive Experimentation (Drug Discovery)
 
-st.header("Experimentación Interactiva: Nuevo Medicamento para un Virus Desconocido")
+st.header("Interactive Experimentation: New Drug for an Unknown Virus")
 
 st.markdown("""
-En este experimento, partiremos de axiomas relacionados con un virus desconocido y 
-trataremos de generar la hipótesis de un nuevo medicamento. El proceso es:
-1. Ingrese dos axiomas sobre el virus.
-2. Estos axiomas se convierten en vectores (simulado).
-3. Se combinan y se aplica razonamiento deductivo, inductivo o abductivo.
-4. El resultado es una propuesta de medicamento o terapia innovadora.
+In this experiment, we will use axioms related to an unknown virus and attempt to generate a hypothesis for a new drug. The process is as follows:
+1. Input two axioms about the virus.
+2. These axioms are converted to vectors (simulated).
+3. They are combined, and deductive, inductive, or abductive reasoning is applied.
+4. The result is a proposal for an innovative drug or therapy.
 """)
 
-# Creación de instancias para la demo interactiva
+# Create instances for interactive demo
 class AxiomEncoder(nn.Module):
     def __init__(self, input_dim, hidden_dim):
         super(AxiomEncoder, self).__init__()
@@ -200,12 +198,19 @@ class ReasoningEngine(nn.Module):
     def forward(self, x, noise=0.0):
         x = self.linear(x)
         x = x + noise * torch.randn_like(x)
+        return x
 
-axiom_encoder = AxiomEncoder(128, 256)
-reasoning_engine = ReasoningEngine(256)
+# Cached model instances to prevent re-initialization
+@st.cache_resource
+def get_models():
+    encoder = AxiomEncoder(128, 256)
+    engine = ReasoningEngine(256)
+    return encoder, engine
 
-axiom_text_1 = st.text_input("Axioma 1", "El virus X se adhiere a receptores proteínicos en las células del huésped.")
-axiom_text_2 = st.text_input("Axioma 2", "Ciertos inhibidores enzimáticos bloquean las proteasas virales del virus X.")
+axiom_encoder, reasoning_engine = get_models()
+
+axiom_text_1 = st.text_input("Axiom 1", "Virus X binds to protein receptors in host cells.")
+axiom_text_2 = st.text_input("Axiom 2", "Certain enzymatic inhibitors block viral proteases of Virus X.")
 
 def text_to_vector(text):
     torch.manual_seed(sum([ord(c) for c in text]))
@@ -219,68 +224,68 @@ enc_ax2 = axiom_encoder(ax2_vec)
 
 combined = enc_ax1 + enc_ax2
 
-st.markdown("**Seleccione el tipo de razonamiento:**")
-reasoning_type = st.selectbox("Tipo de razonamiento", ["Deductivo (0.0 ruido)", "Inductivo (0.05 ruido)", "Abductivo (0.1 ruido)"])
+st.markdown("**Select reasoning type:**")
+reasoning_type = st.selectbox("Reasoning Type", ["Deductive (0.0 noise)", "Inductive (0.05 noise)", "Abductive (0.1 noise)"])
 noise_map = {
-    "Deductivo (0.0 ruido)": 0.0,
-    "Inductivo (0.05 ruido)": 0.05,
-    "Abductivo (0.1 ruido)": 0.1,
+    "Deductive (0.0 noise)": 0.0,
+    "Inductive (0.05 noise)": 0.05,
+    "Abductive (0.1 noise)": 0.1,
 }
 noise_level = noise_map[reasoning_type]
 
-if st.button("Generar Propuesta de Medicamento"):
+if st.button("Generate Drug Proposal"):
     output_vec = reasoning_engine(combined, noise=noise_level)
-    # Hipótesis simbólica
+    # Symbolic hypothesis
     if noise_level == 0.0:
-        hypothesis = "Un medicamento basado en un inhibidor proteínico estable que bloquee la unión receptor-viral."
+        hypothesis = "A drug based on a stable protein inhibitor that blocks receptor-viral binding."
     elif noise_level == 0.05:
-        hypothesis = "Una formulación de inhibidores enzimáticos encapsulados que reducen la proteólisis del virus, evitando su replicación."
+        hypothesis = "A formulation of encapsulated enzymatic inhibitors that reduce viral proteolysis, preventing replication."
     else:
-        hypothesis = "Una nanopartícula que libere inhibidores específicos al detectar proteasas virales, reduciendo la replicación del virus en el huésped."
+        hypothesis = "A nanoparticle that releases specific inhibitors upon detecting viral proteases, reducing replication in the host."
 
-    st.success(f"**Propuesta de Medicamento Generada:** {hypothesis}")
+    st.success(f"**Generated Drug Proposal:** {hypothesis}")
 
 # MATTHEW
 
-st.header("Validación de Teorías y Perspectivas Futuras")
+st.header("Validation of Theories and Future Perspectives")
 
-with st.expander("Validación"):
+with st.expander("Validation"):
     st.markdown("""
-    - **Coherencia Lógica:** Comparar la hipótesis con los axiomas base.
-    - **Originalidad:** Verificar que la propuesta no sea trivial (comparando embeddings con bases de conocimiento).
-    - **Aplicabilidad:** Probar en simulaciones biológicas o modelos computacionales.
+    - **Logical Coherence:** Compare the hypothesis with the base axioms.
+    - **Originality:** Verify that the proposal is non-trivial (comparing embeddings with knowledge bases).
+    - **Applicability:** Test in biological simulations or computational models.
     """)
 
-with st.expander("Impacto Futuro"):
+with st.expander("Future Impact"):
     st.markdown("""
-    En el futuro, MATTHEW podría:
-    - Proponer líneas nuevas de investigación científica.
+    In the future, MATTHEW could:
+    - Propose new lines of scientific research.
     """)
 
-# Ejecución Dinámica de Código
+# Dynamic Code Execution
 
-st.header("Ejecución Dinámica de Código")
+st.header("Dynamic Code Execution")
 
 st.markdown("""
-En esta sección, puedes experimentar con la arquitectura AAA ejecutando código Python relacionado con las variables del proyecto. Por ejemplo:
+In this section, you can experiment with the AAA architecture by executing Python code related to project variables. For example:
 
-**Ejemplo de Código:**  
+**Example Code:**  
 ```python
-# Visualizar la salida del vector combinado
-print("Forma del vector combinado:", combined.shape)
+# View the combined vector output
+print("Shape of combined vector:", combined.shape)
 
-# Analizar los valores del vector
-print("Valores del vector combinado:", combined)
+# Analyze the values of the vector
+print("Values of combined vector:", combined)
 ```
 
-Introduce tu código a continuación:
+Enter your code below:
 """)
 
-user_code = st.text_area("Ingrese su código Python aquí:", value="""print("Forma del vector combinado:", combined.shape)\nprint("Valores del vector combinado:", combined)""")
+user_code = st.text_area("Enter your Python code here:", value="""print("Shape of combined vector:", combined.shape)\nprint("Values of combined vector:", combined)""")
 
-if st.button("Ejecutar Código"):
+if st.button("Execute Code"):
     if 'combined' not in locals():
-        st.error("La variable `combined` no está definida. Por favor, genera los axiomas antes de ejecutar el código.")
+        st.error("The variable `combined` is not defined. Please generate the axioms before executing the code.")
     else:
         buffer = io.StringIO()
         sys.stdout = buffer
@@ -289,12 +294,12 @@ if st.button("Ejecutar Código"):
         try:
             exec(user_code, {}, local_vars)
         except Exception as e:
-            st.error(f"Error al ejecutar el código: {e}")
+            st.error(f"Error executing code: {e}")
         finally:
             sys.stdout = sys.__stdout__
 
         st.text(buffer.getvalue())
 
 st.markdown("---")
-st.markdown("""**¡Gracias por tu atención!** Si tienes comentarios adicionales o necesitas más ayuda, no dudes en escribirme a mi correo: [dylan2406010@hybridge.education](mailto:dylan2406010@hybridge.education).""")
-st.markdown("""[Repositorio](https://github.com/dylansuttonchavez/matthew)""")
+st.markdown("""**Thank you for your attention!** If you have additional comments or need more assistance, feel free to email me at [dylan2406010@hybridge.education](mailto:dylan2406010@hybridge.education).""")
+st.markdown("""[GitHub Repository](https://github.com/dylansuttonchavez/matthew)""")
