@@ -40,8 +40,3 @@ The methodology demonstrates the system's ability to explore non-trivial solutio
 
 **Future Perspectives:**
 - Propose new lines of scientific research.
-
----
-
-**Contact:** [dylan2406010@hybridge.education](mailto:dylan2406010@hybridge.education)  
-**Project Repository:** [https://github.com/dylansuttonchavez/matthew](https://github.com/dylansuttonchavez/matthew)
