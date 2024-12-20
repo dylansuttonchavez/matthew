@@ -233,4 +233,4 @@ with st.expander("Future Impact"):
    
 st.markdown("---")
 st.markdown("""**Thank you for your attention!** If you have additional comments or need more assistance, feel free to email me at [dylan2406010@hybridge.education](mailto:dylan2406010@hybridge.education).""")
-st.markdown("""[GitHub Repository](https://github.com/dylansuttonchavez/matthew)""")
+st.markdown("""[GitHub Repository](https://github.com/dylansuttonchavez/matthew).""")
