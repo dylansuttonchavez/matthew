@@ -1,12 +1,6 @@
 import streamlit as st
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
 import io
 import sys
-import os
-
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 # Page configuration
 st.set_page_config(page_title="MATTHEW: Axiomatic AI Reasoning", page_icon="🌌")
@@ -177,100 +171,36 @@ In this experiment, we will use axioms related to an unknown virus and attempt t
 4. The result is a proposal for an innovative drug or therapy.
 """)
 
-# Model definitions
-class AxiomEncoder(nn.Module):
-    def __init__(self, input_dim, hidden_dim):
-        super(AxiomEncoder, self).__init__()
-        self.linear1 = nn.Linear(input_dim, hidden_dim)
-        self.linear2 = nn.Linear(hidden_dim, hidden_dim)
-
-    def forward(self, x):
-        x = F.relu(self.linear1(x))
-        return self.linear2(x)
-
-class ReasoningEngine(nn.Module):
-    def __init__(self, hidden_dim):
-        super(ReasoningEngine, self).__init__()
-        self.linear = nn.Linear(hidden_dim, hidden_dim)
-
-    def forward(self, x, noise=0.0):
-        x = self.linear(x)
-        return x + noise * torch.randn_like(x)
-
-# Initialize models
-def get_models():
-    encoder = AxiomEncoder(128, 256)
-    engine = ReasoningEngine(256)
-    return encoder, engine
-
-axiom_encoder, reasoning_engine = get_models()
-
 # Text input for axioms
 axiom_text_1 = st.text_input("Axiom 1", "Virus X binds to protein receptors in host cells.")
 axiom_text_2 = st.text_input("Axiom 2", "Certain enzymatic inhibitors block viral proteases of Virus X.")
 
 # Function to simulate text to vector conversion
 def text_to_vector(text):
-    torch.manual_seed(sum(ord(c) for c in text))
-    return torch.rand((1, 128))
+    return sum(ord(c) for c in text)
 
-# Convert axioms to vectors
-ax1_vec = text_to_vector(axiom_text_1)
-ax2_vec = text_to_vector(axiom_text_2)
+# Convert axioms to simulated values
+ax1_value = text_to_vector(axiom_text_1)
+ax2_value = text_to_vector(axiom_text_2)
 
-# Encode vectors
-enc_ax1 = axiom_encoder(ax1_vec)
-enc_ax2 = axiom_encoder(ax2_vec)
-
-# Combine encoded vectors
-combined = enc_ax1 + enc_ax2
+# Combine encoded values
+combined_value = ax1_value + ax2_value
 
 # Select reasoning type
 st.markdown("**Select reasoning type:**")
-reasoning_type = st.selectbox("Reasoning Type", ["Deductive (0.0 noise)", "Inductive (0.05 noise)", "Abductive (0.1 noise)"])
-noise_map = {
-    "Deductive (0.0 noise)": 0.0,
-    "Inductive (0.05 noise)": 0.05,
-    "Abductive (0.1 noise)": 0.1,
-}
-noise_level = noise_map[reasoning_type]
+reasoning_type = st.selectbox("Reasoning Type", ["Deductive", "Inductive", "Abductive"])
 
 # Generate drug proposal
 if st.button("Generate Drug Proposal"):
-    output_vec = reasoning_engine(combined, noise=noise_level)
-    # Generate hypothesis based on reasoning type
-    if noise_level == 0.0:
+    if reasoning_type == "Deductive":
         hypothesis = "A drug based on a stable protein inhibitor that blocks receptor-viral binding."
-    elif noise_level == 0.05:
+    elif reasoning_type == "Inductive":
         hypothesis = "A formulation of encapsulated enzymatic inhibitors that reduce viral proteolysis, preventing replication."
     else:
         hypothesis = "A nanoparticle that releases specific inhibitors upon detecting viral proteases, reducing replication in the host."
 
     st.success(f"**Generated Drug Proposal:** {hypothesis}")
-
-# Debugging and interactive code execution
-st.header("Dynamic Code Execution")
-st.markdown("""
-Enter Python code to experiment with the combined vector or any project variable.
-""")
-
-user_code = st.text_area("Enter your Python code here:", value="""print('Shape of combined vector:', combined.shape)
-print('Values of combined vector:', combined)""")
-
-if st.button("Execute Code"):
-    buffer = io.StringIO()
-    sys.stdout = buffer
-    local_vars = {"combined": combined, "torch": torch}
-
-    try:
-        exec(user_code, {}, local_vars)
-    except Exception as e:
-        st.error(f"Error executing code: {e}")
-    finally:
-        sys.stdout = sys.__stdout__
-
-    st.text(buffer.getvalue())
-
+   
 st.markdown("---")
 st.markdown("""**Thank you for your attention!** If you have additional comments or need more assistance, feel free to email me at [dylan2406010@hybridge.education](mailto:dylan2406010@hybridge.education).""")
 st.markdown("""[GitHub Repository](https://github.com/dylansuttonchavez/matthew)""")
