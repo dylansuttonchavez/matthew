@@ -202,7 +202,7 @@ if st.button("Generate Drug Proposal"):
     st.success(f"**Generated Drug Proposal:** {hypothesis}")
 
 # Multilayer Perceptron
-st.title("**Multilayer Perceptron**")
+st.header("**Multilayer Perceptron**")
 st.markdown("""
 The multilayer perceptron (MLP) is a type of artificial neural network composed of multiple layers of 
 nodes organized in a hierarchical structure. It includes an input layer, one or more hidden layers, 
